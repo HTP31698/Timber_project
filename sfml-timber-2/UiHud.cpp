@@ -13,6 +13,11 @@ void UiHud::SetScore(int score)
 	Utils::SetOrigin(textScore, Origins::TL);
 }
 
+void UiHud::SetScorePosition(const sf::Vector2f& pos)
+{
+	textScore.setPosition(pos);
+}
+
 void UiHud::SetMessage(const std::string& msg)
 {
 	textMessage.setString(msg);
@@ -32,7 +37,6 @@ void UiHud::Init()
 
 	textScore.setCharacterSize(100);
 	textScore.setFillColor(sf::Color::White);
-	textScore.setPosition(20, 20);
 
 	textMessage.setCharacterSize(100);
 	textMessage.setFillColor(sf::Color::White);

@@ -39,7 +39,7 @@ Sides Tree::UpdateBranches()
 void Tree::Init()
 {
 	texIdTree = "graphics/tree.png";
-	texIdBranch = "graphics/branch.png";
+	texIdBranch = "graphics/branch.png"; 
 
 	branches.resize(6);
 	branchesSide.resize(6);
@@ -75,8 +75,6 @@ void Tree::Reset()
 	}
 	branchesSide[branches.size() - 1] = Sides::None;
 
-	sf::FloatRect windowBounds = FRAMEWORK.GetWindowBounds();
-	SetPosition({ windowBounds.width * 0.5f, 0.f });
 }
 
 void Tree::Update(float dt)

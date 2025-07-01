@@ -23,7 +23,7 @@ void SceneGame::Init()
     texIds.push_back("graphics/bee.png");
     texIds.push_back("graphics/tree.png");
     texIds.push_back("graphics/branch.png");
-    texIds.push_back("graphics/player.png");
+    texIds.push_back("graphics/player1.png");
     texIds.push_back("graphics/axe.png");
     texIds.push_back("graphics/rip.png");
 
@@ -128,7 +128,8 @@ void SceneGame::Update(float dt)
         }
 
         player->SetDrawAxe(
-            InputMgr::GetKey(sf::Keyboard::Left) || InputMgr::GetKey(sf::Keyboard::Right));
+            InputMgr::GetKey(sf::Keyboard::Left) ||
+            InputMgr::GetKey(sf::Keyboard::Right));
      
         timer -= dt;
         if (timer <= 0.f)

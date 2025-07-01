@@ -4,26 +4,39 @@
 class Player : public GameObject
 {
 protected:
+	PlayerType playerType;
+
 	sf::Sprite sprite;
+
 	sf::Sprite axe;
+
 
 	Sides side = Sides::Right;
 
 	std::vector<sf::Vector2f> positions;
-	std::vector<sf::Vector2f> scales;
 	std::vector<sf::Vector2f> axePositions;
+	std::vector<sf::Vector2f> scales;
 
 	std::string texPlayerId;
-	std::string ripTexId;
+	std::string texPlayer1Id;
+	std::string texPlayer2Id;
+
 	std::string axeTexId;
+	std::string axe1TexId;
+	std::string axe2TexId;
+
+	std::string ripTexId;
 
 	bool isAlive = true;
 	bool drawAxe = false;
+	
 
 public:
+
 	Player(const std::string& name = "");
 	~Player() override = default;
 	
+	void SetPlayerType(PlayerType type);
 	void SetAlive(bool alive);
 	void SetDrawAxe(bool draw) { drawAxe = draw; }
 
