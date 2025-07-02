@@ -13,11 +13,16 @@ enum class Origins
 enum class SceneIds
 {
 	None = -1,
+	Title,
+	mode,
+	CharacterSelect,
+	CharacterSelectVs,
 	Game,
 	GameVs,
 	Dev1,
 	Dev2,
 	Count,
+
 };
 
 enum class Sides
@@ -25,11 +30,21 @@ enum class Sides
 	Left,
 	Right,
 	None,
+	Up,
+	Down
 };
 
 enum class PlayerType
 {
-	player,
-	player1,
-	player2
+	Player,
+	Player1,
+	Player2,
+};
+
+
+enum class PlayerType2
+{
+	Player3,
+	Player4,
+	Player5,
 };

@@ -35,7 +35,7 @@ void SceneGameVs::Init()
     texIds.push_back("graphics/axe2.png");
 
     texIds.push_back("graphics/rip.png");
-
+    texIds.push_back("graphics/log.png");
     fontIds.push_back("fonts/KOMIKAP_.ttf");
 
 
@@ -48,15 +48,15 @@ void SceneGameVs::Init()
     }
 
     tree1 = (Tree*)AddGameObject(new Tree());
+
     tree2 = (Tree*)AddGameObject(new Tree());
 
     BackgroundElement* element = (BackgroundElement*)AddGameObject(
         new BackgroundElement("graphics/bee.png"));
 
-    player1 = (Player*)AddGameObject(new Player());
-    player1->SetPlayerType(PlayerType::player1); //만약 선택이라면 ()안에 겟함수?
+    player1 = (Player*)AddGameObject(new Player()); 
     player2 = (Player*)AddGameObject(new Player());
-    player2->SetPlayerType(PlayerType::player2);
+
 
     uiHud1 = (UiHud*)AddGameObject(new UiHud());
     uiHud2 = (UiHud*)AddGameObject(new UiHud());
@@ -109,6 +109,7 @@ void SceneGameVs::Update(float dt)
         if (InputMgr::GetKeyDown(sf::Keyboard::A))
         {
             tree1->UpdateBranches();
+            tree1->AddLogs(Sides::Left);
             player1->SetSide(Sides::Left);
             if (tree1->GetSide() == player1->GetSide())
             {
@@ -126,6 +127,7 @@ void SceneGameVs::Update(float dt)
         {
             tree1->UpdateBranches();
             player1->SetSide(Sides::Right);
+            tree1->AddLogs(Sides::Right);
             if (tree1->GetSide() == player1->GetSide())
             {
                 isPlaying1 = false;
@@ -150,6 +152,7 @@ void SceneGameVs::Update(float dt)
         {
             tree2->UpdateBranches();
             player2->SetSide(Sides::Left);
+            tree2->AddLogs(Sides::Left);
             if (tree2->GetSide() == player2->GetSide())
             {
                 isPlaying2 = false;
@@ -166,6 +169,7 @@ void SceneGameVs::Update(float dt)
         {
             tree2->UpdateBranches();
             player2->SetSide(Sides::Right);
+            tree2->AddLogs(Sides::Right);
             if (tree2->GetSide() == player2->GetSide())
             {
                 isPlaying2 = false;
@@ -184,7 +188,7 @@ void SceneGameVs::Update(float dt)
     }
 
     // Enter를 눌러 초기화
-    else
+    else if(!isPlaying1 && !isPlaying2)
     {
         if (InputMgr::GetKeyDown(sf::Keyboard::Enter))
         {

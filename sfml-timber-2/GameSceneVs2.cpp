@@ -1,23 +1,22 @@
 #include "stdafx.h"
-#include "SceneGame.h"
+#include "GameSceneVs2.h"
 #include "SpriteGo.h"
 #include "TextGo.h"
 #include "BackgroundElement.h"
 #include "Tree.h"
 #include "Player.h"
 #include "UiHud.h"
-#include "SoundEffect.h"
 
-SceneGame::SceneGame()
-	: Scene(SceneIds::Game)
+GameSceneVs2::GameSceneVs2()
+	:Scene(SceneIds::GameVs2)
 {
 }
 
-SceneGame::~SceneGame()
+GameSceneVs2::~GameSceneVs2()
 {
 }
 
-void SceneGame::Init()
+void GameSceneVs2::Init()
 {
     texIds.push_back("graphics/background.png");
     texIds.push_back("graphics/cloud.png");
@@ -25,32 +24,24 @@ void SceneGame::Init()
     texIds.push_back("graphics/tree.png");
     texIds.push_back("graphics/branch.png");
     texIds.push_back("graphics/player.png");
-    texIds.push_back("graphics/player1.png");
-    texIds.push_back("graphics/player2.png");
     texIds.push_back("graphics/axe.png");
     texIds.push_back("graphics/rip.png");
-    texIds.push_back("graphics/log.png");
+    texIds.push_back("graphics/branchvs2.png");
 
     fontIds.push_back("fonts/KOMIKAP_.ttf");
-
-    soundIds.push_back("sound/chop.wav");
-    soundIds.push_back("sound/death.wav");
-    soundIds.push_back("sound/out_of_time.wav");
 
     //
 
     AddGameObject(new SpriteGo("graphics/background.png"));
-    
+
     for (int i = 0; i < 3; ++i)
     {
-        BackgroundElement* element = (BackgroundElement*)AddGameObject(
-            new BackgroundElement("graphics/cloud.png"));
+        BackgroundElement* element = (BackgroundElement*)AddGameObject(new BackgroundElement("graphics/cloud.png"));
     }
 
     tree = (Tree*)AddGameObject(new Tree());
 
-    BackgroundElement* element = (BackgroundElement*)AddGameObject(
-        new BackgroundElement("graphics/bee.png"));
+    BackgroundElement* element = (BackgroundElement*)AddGameObject(new BackgroundElement("graphics/bee.png"));
     element->minScale = 1.f;
     element->maxScale = 1.f;
     element->minY = 600;
@@ -60,19 +51,16 @@ void SceneGame::Init()
     element->SetMoveType(BackgroundElement::MoveType::Wave);
 
     player = (Player*)AddGameObject(new Player());
-    player->SetPlayerType(Utils::GetPlayerType());
 
     uiHud = (UiHud*)AddGameObject(new UiHud());
-    soundEffect = (SoundEffect*)AddGameObject(new SoundEffect());
 
     Scene::Init();
 }
 
-void SceneGame::Enter()
+void GameSceneVs2::Enter()
 {
     Scene::Enter();
-    
-    tree->SetPosition({ 1980.f*0.5f, 0.f });
+
     sf::Vector2f pos = tree->GetPosition();
     pos.y = 950.f;
     player->SetPosition(pos);
@@ -87,12 +75,12 @@ void SceneGame::Enter()
     uiHud->SetMessage("Enter to Start!");
 }
 
-void SceneGame::Exit()
+void GameSceneVs2::Exit()
 {
     Scene::Exit();
 }
 
-void SceneGame::Update(float dt)
+void GameSceneVs2::Update(float dt)
 {
     Scene::Update(dt);
 
@@ -107,17 +95,14 @@ void SceneGame::Update(float dt)
                 isPlaying = false;
                 FRAMEWORK.SetTimeScale(0.f);
                 player->SetAlive(false);
-                soundEffect->PlaySoundDeath();
+
                 uiHud->SetShowMassage(true);
                 uiHud->SetMessage("Enter to Restart!");
             }
             else
             {
                 score += 10;
-                soundEffect->PlaySoundChop();
                 uiHud->SetScore(score);
-                tree->AddLogs(Sides::Left);
-                timer = timerMax;
             }
         }
 
@@ -130,7 +115,6 @@ void SceneGame::Update(float dt)
                 isPlaying = false;
                 FRAMEWORK.SetTimeScale(0.f);
                 player->SetAlive(false);
-                soundEffect->PlaySoundDeath();
 
                 uiHud->SetShowMassage(true);
                 uiHud->SetMessage("Enter to Restart!");
@@ -138,33 +122,22 @@ void SceneGame::Update(float dt)
             else
             {
                 score += 10;
-                soundEffect->PlaySoundChop();
                 uiHud->SetScore(score);
-                tree->AddLogs(Sides::Right);
-                timer = timerMax;
             }
         }
 
         player->SetDrawAxe(
-            InputMgr::GetKey(sf::Keyboard::Left) ||
-            InputMgr::GetKey(sf::Keyboard::Right));
-     
-        float speed = score / 100.f + 1;
-        if (speed > 11)
-        {
-            speed = 11;
-        }
-        timer -= dt*speed;
+            InputMgr::GetKey(sf::Keyboard::Left) || InputMgr::GetKey(sf::Keyboard::Right));
+
+        timer -= dt;
         if (timer <= 0.f)
         {
             timer = 0.f;
-            soundEffect->PlaySoundOutOfTime();
 
             isPlaying = false;
             FRAMEWORK.SetTimeScale(0.f);
             player->SetAlive(false);
-            soundEffect->PlaySoundDeath();
-                
+
             uiHud->SetShowMassage(true);
             uiHud->SetMessage("Enter to Restart!");
         }
@@ -189,5 +162,5 @@ void SceneGame::Update(float dt)
         }
     }
 
-    
+
 }

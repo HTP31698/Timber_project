@@ -12,6 +12,7 @@ protected:
 	Player* player2;
 	Tree* tree1;
 	Tree* tree2;
+
 	UiHud* uiHud1;
 	UiHud* uiHud2;
 

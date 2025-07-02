@@ -5,6 +5,8 @@ class Player : public GameObject
 {
 protected:
 	PlayerType playerType;
+	PlayerType2 playerType2;
+
 
 	sf::Sprite sprite;
 
@@ -37,6 +39,8 @@ public:
 	~Player() override = default;
 	
 	void SetPlayerType(PlayerType type);
+	void SetPlayerType2(PlayerType2 type);
+
 	void SetAlive(bool alive);
 	void SetDrawAxe(bool draw) { drawAxe = draw; }
 

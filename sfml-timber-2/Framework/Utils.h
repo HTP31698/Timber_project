@@ -6,9 +6,17 @@ class Utils
 private:
 	static std::random_device rd;
 	static std::mt19937 gen;
+	static PlayerType playerType;
+	static PlayerType2 playerType2;
 
 public:
 	static void Init();
+	//
+	static void SetPlayerType(PlayerType player) { playerType = player; }
+	static void SetPlayerType2(PlayerType2 player1) { playerType2 = player1; }
+
+	static PlayerType GetPlayerType() { return playerType; }
+	static PlayerType2 GetPlayerType2() { return playerType2; }
 
 	// Random
 	static float RandomValue(); // 0.0f ~ 1.0f

@@ -1,18 +1,15 @@
 #pragma once
 #include "Scene.h"
-
 class Player;
 class Tree;
 class UiHud;
-class SoundEffect;
 
-class SceneGame : public Scene
+class GameSceneVs2 : public Scene
 {
 protected:
 	Player* player;
 	Tree* tree;
 	UiHud* uiHud;
-	SoundEffect* soundEffect;
 
 	bool isPlaying = false;
 	int score = 0;
@@ -20,8 +17,8 @@ protected:
 	float timerMax = 5.f;
 
 public:
-	SceneGame();
-	~SceneGame() override;
+	GameSceneVs2();
+	~GameSceneVs2() override;
 
 	void Init() override;
 

@@ -11,20 +11,26 @@ void Player::SetPlayerType(PlayerType type)
 	playerType = type;
 }
 
+void Player::SetPlayerType2(PlayerType2 type)
+{
+	playerType2 = type;
+}
+
+
 void Player::SetAlive(bool alive)
 {
 	isAlive = alive;
 	if (isAlive)
 	{
-		if (playerType == PlayerType::player)
+		if (Utils::GetPlayerType() == PlayerType::Player)
 		{
 			sprite.setTexture(TEXTURE_MGR.Get(texPlayerId));
 		}
-		if (playerType == PlayerType::player1)
+		if (Utils::GetPlayerType() == PlayerType::Player1)
 		{
 			sprite.setTexture(TEXTURE_MGR.Get(texPlayer1Id));
 		}
-		if (playerType == PlayerType::player2)
+		if (Utils::GetPlayerType() == PlayerType::Player2)
 		{
 			sprite.setTexture(TEXTURE_MGR.Get(texPlayer2Id));
 		}
@@ -85,17 +91,33 @@ void Player::Release()
 
 void Player::Reset()
 {
-	if (playerType == PlayerType::player)
+	if (Utils::GetPlayerType() == PlayerType::Player)
 	{
 		sprite.setTexture(TEXTURE_MGR.Get(texPlayerId));
 		Utils::SetOrigin(sprite, Origins::BC);
 	}
-	if (playerType == PlayerType::player1)
+	if (Utils::GetPlayerType() == PlayerType::Player1)
 	{
 		sprite.setTexture(TEXTURE_MGR.Get(texPlayer1Id));
 		Utils::SetOrigin(sprite, Origins::BC);
 	}
-	if (playerType == PlayerType::player2)
+	if (Utils::GetPlayerType() == PlayerType::Player2)
+	{
+		sprite.setTexture(TEXTURE_MGR.Get(texPlayer2Id));
+		Utils::SetOrigin(sprite, Origins::BC);
+	}
+
+	if (Utils::GetPlayerType2() == PlayerType2::Player3)
+	{
+		sprite.setTexture(TEXTURE_MGR.Get(texPlayerId));
+		Utils::SetOrigin(sprite, Origins::BC);
+	}
+	if (Utils::GetPlayerType2() == PlayerType2::Player4)
+	{
+		sprite.setTexture(TEXTURE_MGR.Get(texPlayer1Id));
+		Utils::SetOrigin(sprite, Origins::BC);
+	}
+	if (Utils::GetPlayerType2() == PlayerType2::Player5)
 	{
 		sprite.setTexture(TEXTURE_MGR.Get(texPlayer2Id));
 		Utils::SetOrigin(sprite, Origins::BC);

@@ -18,10 +18,26 @@ void UiHud::SetScorePosition(const sf::Vector2f& pos)
 	textScore.setPosition(pos);
 }
 
+void UiHud::setScoreSize(int size)
+{
+	
+	textScore.setCharacterSize(size);
+}
+
 void UiHud::SetMessage(const std::string& msg)
 {
 	textMessage.setString(msg);
 	Utils::SetOrigin(textMessage, Origins::MC);
+}
+
+void UiHud::SetMessageSize(int size)
+{
+	textMessage.setCharacterSize(size);
+}
+
+void UiHud::SetMessagePosition(const sf::Vector2f& pos)
+{
+	textMessage.setPosition(pos);
 }
 
 void UiHud::SetTimeBar(float value)

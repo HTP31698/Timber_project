@@ -4,12 +4,19 @@
 #include "SceneGameVs.h"
 #include "SceneDev1.h"
 #include "SceneDev2.h"
-
+#include "SceneTitle.h"
+#include "SceneCharacterSelect.h"
+#include "SceneCharacterSelectVs.h"
+#include "SceneMode.h"
 
 void SceneMgr::Init()
 {
+	scenes.push_back(new SceneTitle());
+	scenes.push_back(new SceneMode());
+	scenes.push_back(new SceneCharacterSelect());
+	scenes.push_back(new SceneCharacterSelectVs());
+	scenes.push_back(new SceneGame());
 	scenes.push_back(new SceneGameVs());
-	scenes.push_back(new SceneDev1());
 	scenes.push_back(new SceneDev2());
 
 	for (auto scene : scenes)

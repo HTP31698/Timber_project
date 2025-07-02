@@ -36,13 +36,32 @@ Sides Tree::UpdateBranches()
 	return branchesSide[0];
 }
 
+void Tree::AddLogs(Sides side)
+{
+	for (auto obj : logs)
+	{
+		
+		if (!obj->GetActive())
+		{
+			
+			obj->SetActive(true);
+			obj->setDirection(side);
+
+			break;
+		}
+	}
+
+}
+
 void Tree::Init()
 {
 	texIdTree = "graphics/tree.png";
 	texIdBranch = "graphics/branch.png"; 
+	texIdLog = "graphics/log.png";
 
 	branches.resize(6);
 	branchesSide.resize(6);
+	logs.resize(20);
 }
 
 void Tree::Release()
@@ -74,12 +93,27 @@ void Tree::Reset()
 		}
 	}
 	branchesSide[branches.size() - 1] = Sides::None;
-
+	sf::Vector2f pos = GetPosition();
+	pos.y += 900;
+	for (int i = 0; i < 20; i++)
+	{
+		logs[i] = new Log();
+		logs[i]->SetActive(false);
+		logs[i]->Init();
+		logs[i]->setLogInitPosition(pos);
+		logs[i]->Reset();
+		
+	}
+	
 }
 
 void Tree::Update(float dt)
 {
-
+	for (auto obj : logs)
+	{
+		obj->Update(dt);
+		
+	}
 }
 
 void Tree::Draw(sf::RenderWindow& window)
@@ -91,6 +125,13 @@ void Tree::Draw(sf::RenderWindow& window)
 		if (branchesSide[i] != Sides::None)
 		{
 			window.draw(branches[i]);
+		}
+	}
+	for (auto obj : logs)
+	{
+		if (obj->GetActive())
+		{
+			obj->Draw(window);
 		}
 	}
 }
