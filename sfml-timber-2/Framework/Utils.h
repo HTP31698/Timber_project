@@ -9,6 +9,7 @@ private:
 	static PlayerType playerType;
 	static PlayerType2 playerType2;
 
+
 public:
 	static void Init();
 	//
@@ -28,6 +29,8 @@ public:
 	static sf::Vector2f SetOrigin(sf::Shape& obj, Origins preset);
 	static sf::Vector2f SetOrigin(sf::Text& obj, Origins preset);
 	static sf::Vector2f SetOrigin(sf::Sprite& obj, Origins preset);
+
+	static std::string GetPlayerTexture(int playerNum);
 };
 
 

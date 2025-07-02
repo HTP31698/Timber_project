@@ -53,3 +53,27 @@ sf::Vector2f Utils::SetOrigin(sf::Sprite& obj, Origins preset)
 {
     return SetOrigin(obj, preset, obj.getLocalBounds());
 }
+
+
+std::string Utils::GetPlayerTexture(int playerNum)
+{
+    if (playerNum == 1) {
+        // Player1¿ë
+        switch (playerType) {
+        case PlayerType::Player: return "graphics/player.png";
+        case PlayerType::Player1: return "graphics/player1.png";
+        case PlayerType::Player2: return "graphics/player2.png";
+        default: return "graphics/player.png";
+        }
+    }
+    else if (playerNum == 2) {
+        // Player2¿ë
+        switch (playerType2) {
+        case PlayerType2::Player3: return "graphics/player.png";
+        case PlayerType2::Player4: return "graphics/player1.png";
+        case PlayerType2::Player5: return "graphics/player2.png";
+        default: return "graphics/player.png";
+        }
+    }
+    return "graphics/player.png";
+}

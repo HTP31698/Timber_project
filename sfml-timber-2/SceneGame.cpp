@@ -19,7 +19,7 @@ SceneGame::~SceneGame()
 
 void SceneGame::Init()
 {
-    texIds.push_back("graphics/background.png");
+    texIds.push_back("graphics/background.jpg");
     texIds.push_back("graphics/cloud.png");
     texIds.push_back("graphics/bee.png");
     texIds.push_back("graphics/tree.png");
@@ -39,7 +39,7 @@ void SceneGame::Init()
 
     //
 
-    AddGameObject(new SpriteGo("graphics/background.png"));
+    AddGameObject(new SpriteGo("graphics/background.jpg"));
     
     for (int i = 0; i < 3; ++i)
     {
@@ -85,6 +85,8 @@ void SceneGame::Enter()
 
     uiHud->SetShowMassage(true);
     uiHud->SetMessage("Enter to Start!");
+
+    player->Reset(1);
 }
 
 void SceneGame::Exit()
@@ -175,7 +177,7 @@ void SceneGame::Update(float dt)
         if (InputMgr::GetKeyDown(sf::Keyboard::Enter))
         {
             FRAMEWORK.SetTimeScale(1.f);
-            player->Reset();
+            player->Reset(1);
             tree->Reset();
             isPlaying = true;
 

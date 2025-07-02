@@ -20,8 +20,6 @@ protected:
 	std::vector<sf::Vector2f> scales;
 
 	std::string texPlayerId;
-	std::string texPlayer1Id;
-	std::string texPlayer2Id;
 
 	std::string axeTexId;
 	std::string axe1TexId;
@@ -52,6 +50,7 @@ public:
 	void Init() override;
 	void Release() override;
 	void Reset() override;
+	void Reset(int playerNum = 1);
 	void Update(float dt) override;
 	void Draw(sf::RenderWindow& window) override;
 
