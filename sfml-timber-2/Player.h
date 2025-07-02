@@ -21,7 +21,7 @@ protected:
 	bool drawAxe = false;
 
 public:
-	Player(const std::string& name = "");
+	Player(const std::string& texPlayerId = "graphics/player1.png", const std::string& name = "");
 	~Player() override = default;
 	
 	void SetAlive(bool alive);

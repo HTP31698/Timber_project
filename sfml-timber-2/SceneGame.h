@@ -1,6 +1,6 @@
 #pragma once
 #include "Scene.h"
-
+#include "SoundEffect.h"
 class Player;
 class Tree;
 class UiHud;
@@ -11,6 +11,7 @@ protected:
 	Player* player;
 	Tree* tree;
 	UiHud* uiHud;
+	SoundEffect* soundEffect;
 
 	bool isPlaying = false;
 	int score = 0;
@@ -26,5 +27,6 @@ public:
 	void Enter() override;
 	void Exit() override;
 	void Update(float dt) override;
+	void GameOver();
 };
 

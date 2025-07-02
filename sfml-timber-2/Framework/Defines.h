@@ -14,6 +14,7 @@ enum class SceneIds
 {
 	None = -1,
 	Game,
+	CharacterSelect,
 	Dev1,
 	Dev2,
 	Count,
@@ -24,4 +25,12 @@ enum class Sides
 	Left,
 	Right,
 	None,
+};
+
+
+enum class PlayerType
+{
+	Player,
+	Player1,
+	Player2,
 };

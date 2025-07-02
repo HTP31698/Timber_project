@@ -6,10 +6,12 @@ class Utils
 private:
 	static std::random_device rd;
 	static std::mt19937 gen;
-
+	static PlayerType playerType;
 public:
 	static void Init();
-
+	//
+	static void SetPlayerType(PlayerType player) { playerType = player; }
+	static PlayerType GetPlayerType() { return playerType; }
 	// Random
 	static float RandomValue(); // 0.0f ~ 1.0f
 	static int RandomRange(int min, int maxExclude);

@@ -1,8 +1,10 @@
 #include "stdafx.h"
 #include "Player.h"
 
-Player::Player(const std::string& name)
-	: GameObject(name)
+
+
+Player::Player(const std::string& texPlayerId, const std::string& name)
+	: GameObject(name), texPlayerId(texPlayerId)
 {
 }
 
@@ -42,7 +44,7 @@ void Player::SetPosition(const sf::Vector2f& pos)
 
 void Player::Init()
 {
-	texPlayerId = "graphics/player.png";
+	
 	axeTexId = "graphics/axe.png";
 	ripTexId = "graphics/rip.png";
 

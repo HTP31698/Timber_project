@@ -10,6 +10,8 @@ void Tree::SetPosition(const sf::Vector2f& pos)
 	{
 		branches[i].setPosition(pos.x, i * 150.f);
 	}
+
+
 }
 
 Sides Tree::UpdateBranches()
@@ -36,13 +38,35 @@ Sides Tree::UpdateBranches()
 	return branchesSide[0];
 }
 
+
+
+void Tree::AddLogs(Sides side)
+{
+	for (auto obj : logs)
+	{
+		if (!obj->GetActive())
+		{
+			obj->SetActive(true);
+			obj->setDirection(side);
+			
+			break;
+		}
+	}
+	
+	
+	
+}
+
 void Tree::Init()
 {
 	texIdTree = "graphics/tree.png";
 	texIdBranch = "graphics/branch.png";
-
+	texIdLog = "graphics/log.png";
 	branches.resize(6);
 	branchesSide.resize(6);
+	logs.resize(20);
+
+
 }
 
 void Tree::Release()
@@ -51,6 +75,10 @@ void Tree::Release()
 
 void Tree::Reset()
 {
+	sf::FloatRect windowBounds = FRAMEWORK.GetWindowBounds();
+
+
+
 	tree.setTexture(TEXTURE_MGR.Get(texIdTree), true);
 	Utils::SetOrigin(tree, Origins::TC);
 
@@ -72,20 +100,35 @@ void Tree::Reset()
 			branches[i].setScale(1.f, 1.f);
 			break;
 		}
+		for (int i = 0; i < 20; i++)
+		{
+			logs[i] = new Log();
+			logs[i]->SetActive(false);
+			logs[i]->Init();
+			logs[i]->Reset();
+		}
 	}
+
 	branchesSide[branches.size() - 1] = Sides::None;
 
-	sf::FloatRect windowBounds = FRAMEWORK.GetWindowBounds();
+
 	SetPosition({ windowBounds.width * 0.5f, 0.f });
 }
 
 void Tree::Update(float dt)
 {
 
+	for (auto obj : logs)
+	{
+		obj->Update(dt);
+	}
+
+
 }
 
 void Tree::Draw(sf::RenderWindow& window)
 {
+
 	window.draw(tree);
 
 	for (int i = 0; i < branches.size(); ++i)
@@ -95,4 +138,15 @@ void Tree::Draw(sf::RenderWindow& window)
 			window.draw(branches[i]);
 		}
 	}
+
+	for (auto obj : logs)
+	{
+		if (obj->GetActive())
+		{
+			obj->Draw(window);
+		}
+	}
+	
+
+
 }

@@ -24,10 +24,18 @@ void SceneGame::Init()
     texIds.push_back("graphics/tree.png");
     texIds.push_back("graphics/branch.png");
     texIds.push_back("graphics/player.png");
+    texIds.push_back("graphics/player1.png");
+    texIds.push_back("graphics/player2.png");
     texIds.push_back("graphics/axe.png");
     texIds.push_back("graphics/rip.png");
+    texIds.push_back("graphics/log.png");
+
 
     fontIds.push_back("fonts/KOMIKAP_.ttf");
+
+    soundIds.push_back("sound/chop.wav");
+    soundIds.push_back("sound/death.wav");
+    soundIds.push_back("sound/out_of_time.wav");
 
     //
 
@@ -51,10 +59,10 @@ void SceneGame::Init()
     element->maxSpeed = 600;
     element->SetMoveType(BackgroundElement::MoveType::Wave);
 
-    player = (Player*)AddGameObject(new Player());
+    player = (Player*)AddGameObject(new Player("graphics/player2.png"));
 
     uiHud = (UiHud*)AddGameObject(new UiHud());
-
+    soundEffect = (SoundEffect*)AddGameObject(new SoundEffect());
     Scene::Init();
 }
 
@@ -93,17 +101,15 @@ void SceneGame::Update(float dt)
             player->SetSide(Sides::Left);
             if (tree->GetSide() == player->GetSide())
             {
-                isPlaying = false;
-                FRAMEWORK.SetTimeScale(0.f);
-                player->SetAlive(false);
-
-                uiHud->SetShowMassage(true);
-                uiHud->SetMessage("Enter to Restart!");
+                GameOver();
             }
             else
             {
                 score += 10;
+                timer = timerMax;
                 uiHud->SetScore(score);
+                tree->AddLogs(Sides::Left);
+                soundEffect->PlaySoundChop();
             }
         }
 
@@ -113,17 +119,15 @@ void SceneGame::Update(float dt)
             player->SetSide(Sides::Right);
             if (tree->GetSide() == player->GetSide())
             {
-                isPlaying = false;
-                FRAMEWORK.SetTimeScale(0.f);
-                player->SetAlive(false);
-
-                uiHud->SetShowMassage(true);
-                uiHud->SetMessage("Enter to Restart!");
+                GameOver();
             }
             else
             {
                 score += 10;
+                timer = timerMax;
                 uiHud->SetScore(score);
+                tree->AddLogs(Sides::Right);
+                soundEffect->PlaySoundChop();
             }
         }
 
@@ -135,12 +139,7 @@ void SceneGame::Update(float dt)
         {
             timer = 0.f;
 
-            isPlaying = false;
-            FRAMEWORK.SetTimeScale(0.f);
-            player->SetAlive(false);
-
-            uiHud->SetShowMassage(true);
-            uiHud->SetMessage("Enter to Restart!");
+            GameOver();
         }
         uiHud->SetTimeBar(timer / timerMax);
     }
@@ -160,8 +159,21 @@ void SceneGame::Update(float dt)
             uiHud->SetTimeBar(timer / timerMax);
 
             uiHud->SetShowMassage(false);
+            soundEffect->PlaySoundOutOfTime();
         }
     }
 
     
+}
+
+void SceneGame::GameOver()
+{
+
+    isPlaying = false;
+    FRAMEWORK.SetTimeScale(0.f);
+    player->SetAlive(false);
+
+    uiHud->SetShowMassage(true);
+    uiHud->SetMessage("Enter to Restart!");
+    soundEffect->PlaySoundDeath();
 }

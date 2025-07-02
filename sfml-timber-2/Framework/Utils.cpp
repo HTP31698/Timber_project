@@ -3,6 +3,7 @@
 
 std::random_device Utils::rd;
 std::mt19937 Utils::gen;
+PlayerType Utils::playerType = PlayerType::Player1;
 
 void Utils::Init()
 {
