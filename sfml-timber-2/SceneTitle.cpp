@@ -77,7 +77,7 @@ void SceneTitle::Enter()
     sf::Vector2f pos1 = tree1->GetPosition();
     pos1.y = 950.f;
     player1->SetPosition(pos1);
-
+    player1->Reset(1);
 }
 void SceneTitle::Exit()
 {

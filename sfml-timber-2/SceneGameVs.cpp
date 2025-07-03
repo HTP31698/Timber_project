@@ -19,7 +19,7 @@ SceneGameVs::~SceneGameVs()
 
 void SceneGameVs::Init()
 {
-    texIds.push_back("graphics/background.png");
+    texIds.push_back("graphics/background.jpg");
     texIds.push_back("graphics/cloud.png");
     texIds.push_back("graphics/bee.png");
 
@@ -39,7 +39,7 @@ void SceneGameVs::Init()
     fontIds.push_back("fonts/KOMIKAP_.ttf");
 
 
-    AddGameObject(new SpriteGo("graphics/background.png"));
+    AddGameObject(new SpriteGo("graphics/background.jpg"));
 
     for (int i = 0; i < 3; ++i)
     {
@@ -92,6 +92,9 @@ void SceneGameVs::Enter()
     uiHud1->SetMessage("Enter to Start!");
     uiHud2->SetShowMassage(false);
     uiHud2->SetTimeBar(0.f);
+
+    player1->Reset(1);
+    player2->Reset(2);
 }
 
 void SceneGameVs::Exit()
@@ -193,8 +196,8 @@ void SceneGameVs::Update(float dt)
         if (InputMgr::GetKeyDown(sf::Keyboard::Enter))
         {
             FRAMEWORK.SetTimeScale(1.f);
-            player1->Reset();
-            player2->Reset();
+            player1->Reset(1);
+            player2->Reset(2);
             tree1->Reset();
             tree2->Reset();
             isPlaying1 = true;
@@ -281,7 +284,12 @@ void SceneGameVs::Update(float dt)
     }
     uiHud1->SetTimeBar(timer / timerMax);
  
+    if (InputMgr::GetKeyDown(sf::Keyboard::Escape))
+    {
 
+        SCENE_MGR.ChangeScene(SceneIds::Title);
+
+    }
 
 
 }

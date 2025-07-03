@@ -174,7 +174,12 @@ void SceneCharacterSelectVs::Update(float dt)
 	{
 		SCENE_MGR.ChangeScene(SceneIds::GameVs);
 	}
+	if (InputMgr::GetKeyDown(sf::Keyboard::Escape))
+	{
 
+		SCENE_MGR.ChangeScene(SceneIds::mode);
+
+	}
 }
 
 void SceneCharacterSelectVs::Draw(sf::RenderWindow& window)

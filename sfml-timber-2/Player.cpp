@@ -28,11 +28,11 @@ void Player::SetAlive(bool alive)
 		}
 		if (Utils::GetPlayerType() == PlayerType::Player1)
 		{
-			sprite.setTexture(TEXTURE_MGR.Get(texPlayer1Id));
+			sprite.setTexture(TEXTURE_MGR.Get(texPlayerId));
 		}
 		if (Utils::GetPlayerType() == PlayerType::Player2)
 		{
-			sprite.setTexture(TEXTURE_MGR.Get(texPlayer2Id));
+			sprite.setTexture(TEXTURE_MGR.Get(texPlayerId));
 		}
 	}
 	else
@@ -64,9 +64,6 @@ void Player::SetPosition(const sf::Vector2f& pos)
 
 void Player::Init()
 {
-	texPlayerId = "graphics/player.png";
-	texPlayer1Id = "graphics/player1.png";
-	texPlayer2Id = "graphics/player2.png";
 	axeTexId = "graphics/axe.png";
 	axe1TexId = "graphics/axe1.png";
 	axe2TexId = "graphics/axe2.png";
@@ -91,47 +88,21 @@ void Player::Release()
 
 void Player::Reset()
 {
-	if (Utils::GetPlayerType() == PlayerType::Player)
-	{
-		sprite.setTexture(TEXTURE_MGR.Get(texPlayerId));
-		Utils::SetOrigin(sprite, Origins::BC);
-	}
-	if (Utils::GetPlayerType() == PlayerType::Player1)
-	{
-		sprite.setTexture(TEXTURE_MGR.Get(texPlayer1Id));
-		Utils::SetOrigin(sprite, Origins::BC);
-	}
-	if (Utils::GetPlayerType() == PlayerType::Player2)
-	{
-		sprite.setTexture(TEXTURE_MGR.Get(texPlayer2Id));
-		Utils::SetOrigin(sprite, Origins::BC);
-	}
+}
 
-	if (Utils::GetPlayerType2() == PlayerType2::Player3)
-	{
-		sprite.setTexture(TEXTURE_MGR.Get(texPlayerId));
-		Utils::SetOrigin(sprite, Origins::BC);
-	}
-	if (Utils::GetPlayerType2() == PlayerType2::Player4)
-	{
-		sprite.setTexture(TEXTURE_MGR.Get(texPlayer1Id));
-		Utils::SetOrigin(sprite, Origins::BC);
-	}
-	if (Utils::GetPlayerType2() == PlayerType2::Player5)
-	{
-		sprite.setTexture(TEXTURE_MGR.Get(texPlayer2Id));
-		Utils::SetOrigin(sprite, Origins::BC);
-	}
+void Player::Reset(int playerNum)
+{
+	texPlayerId = Utils::GetPlayerTexture(playerNum);
+	sprite.setTexture(TEXTURE_MGR.Get(texPlayerId));
+	Utils::SetOrigin(sprite, Origins::BC);
 
 	axe.setTexture(TEXTURE_MGR.Get(axeTexId));
 	Utils::SetOrigin(axe, Origins::BC);
-
 	SetSide(Sides::Right);
 }
 
 void Player::Update(float dt)
 {
-
 }
 
 void Player::Draw(sf::RenderWindow& window)

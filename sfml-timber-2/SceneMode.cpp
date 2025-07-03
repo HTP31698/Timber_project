@@ -104,4 +104,10 @@ void SceneMode::Update(float dt)
 			SCENE_MGR.ChangeScene(SceneIds::CharacterSelectVs);
 		}
 	}
+	if (InputMgr::GetKeyDown(sf::Keyboard::Escape))
+	{
+
+		SCENE_MGR.ChangeScene(SceneIds::Title);
+
+	}
 }
